@@ -1,9 +1,9 @@
-```
+```php
+
 安装composer :  composer install
 
 生成 .env :   copy .env.example  .env
 
-             cp .env.example  .env
 
 composer dump-autoload
 生成laravel秘钥： php artisan key:generate
@@ -12,7 +12,7 @@ git config --global user.email
 git config --global user.name
 
 ---------------------------------
-github ssl 证书：
+github ssl 证书：（不同于码云）
 
 env GIT_SSL_NO_VERIFY=true git clone https://<host_name/git/project.git
 git config http.sslVerify "false"
@@ -147,10 +147,12 @@ npm install
      解决方法2、删除上面两个文件中含有报错信息的那行
 
      解决方法3、创建新的迁移文件
-    
+	 
 二，iframe 内联框架  解决页面多个弹窗问题，layUI同一页面弹框切换  跨域问题
 
 https://www.jianshu.com/p/9c15a8adce4a
 
 配置：npm install anywhere -g
+
 ```
+

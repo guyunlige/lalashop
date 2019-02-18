@@ -3,7 +3,6 @@
 
 生成 .env :   copy .env.example  .env
 
-             cp .env.example  .env
 
 composer dump-autoload
 生成laravel秘钥： php artisan key:generate
@@ -12,7 +11,7 @@ git config --global user.email
 git config --global user.name
 
 ---------------------------------
-github ssl 证书：
+github ssl 证书：（不同于码云）
 
 env GIT_SSL_NO_VERIFY=true git clone https://<host_name/git/project.git
 git config http.sslVerify "false"
