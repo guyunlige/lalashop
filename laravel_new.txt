@@ -1,0 +1,4 @@
+
+1,移除前端脚手架代码
+
+php artisan preset none
