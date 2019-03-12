@@ -10,6 +10,8 @@ composer dump-autoload
 git config --global user.email
 git config --global user.name
 
+
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
 ---------------------------------
 github ssl 证书：（不同于码云）
 

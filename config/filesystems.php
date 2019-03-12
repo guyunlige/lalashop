@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    // 公共磁盘开放---图片放在public下
+    // php artisan storage:link
+    'default' => env('FILESYSTEM_DRIVER', 'public'), // local
 
     /*
     |--------------------------------------------------------------------------

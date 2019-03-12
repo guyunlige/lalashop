@@ -21,3 +21,14 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+// 工厂模式--批量生产多个假数据填充数据库
+// php artisan tinker
+// factory(App\Post::class,10)->make();//创建十条,页面上
+// factory(App\Post::class,10)->create();//传到数据库
+$factory->define(App\Post::class, function (Faker $faker) {
+    return [
+        'title' => $faker->sentence(6),
+        'email' => $faker->paragraph(10),
+    ];
+});
