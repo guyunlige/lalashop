@@ -10,10 +10,7 @@ class PostController extends Controller
     //列表页
     public function index()
     {
-//        $posts = Post::orderBy('created_at','desc')->get();
-//        return view('post/index',compact(posts));
         return view('post/index');
-
     }
 
     //详情页
