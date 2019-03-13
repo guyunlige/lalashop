@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use \App\Post;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     //列表页
     public function index()
     {
-        return view('post/index');
+        $posts = Post::orderBy('created_at','desc')->paginate(1);
+        return view('post/index',compact('posts'));
     }
 
     //详情页
-    public function show()
+    public function show(Post $post)
     {
-        return view('post/show');
+        return view('post/show',compact('post'));
     }
 
     // 创建文章--页面
@@ -29,17 +29,18 @@ class PostController extends Controller
     public function store()
     {
         //验证
-        $this->validate(\request(),[
-            'title'=>'required|string|min:10',
-        ],[
-            'title.min'=>'文章标题过短'
-        ]);
+//        $this->validate(\request(),[
+//            'title'=>'required|string|min:10',
+//        ],[
+//            'title.min'=>'文章标题过短'
+//        ]);
 
         //逻辑
-        $post = Post::create(\request(['title','content']));
+        $post = Post::create(request(['title','content']));
 
+//        dd($post);
         //渲染
-        return redirect('posts');
+        return redirect('/posts');
     }
 
     //编辑--页面

@@ -29,6 +29,6 @@ $factory->define(App\User::class, function (Faker $faker) {
 $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(6),
-        'email' => $faker->paragraph(10),
+        'content' => $faker->paragraph(10),
     ];
 });
