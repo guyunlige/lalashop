@@ -14,7 +14,7 @@
 
                 <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="#">Kassandra Ankunding2</a></p>
 
-                <p>{{$post->content}}</p>
+                <p>{!! $post->content !!}</p>
                 <div>
                     <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
 
@@ -43,8 +43,7 @@
                 <!-- List group -->
                 <ul class="list-group">
                     <form action="/posts/comment" method="post">
-                        <input type="hidden" name="_token" value="4BfTBDF90Mjp8hdoie6QGDPJF2J5AgmpsC9ddFHD">
-                        <input type="hidden" name="post_id" value="62"/>
+                        {{csrf_field()}}
                         <li class="list-group-item">
                             <textarea name="content" class="form-control" rows="10"></textarea>
                             <button class="btn btn-default" type="submit">提交</button>
