@@ -2,7 +2,7 @@
 @section("content")
 <div class="col-sm-8 blog-main">
             <form action="/posts" method="POST">
-                {{ csrf_token() }}
+                {{csrf_field()}}
                 <div class="form-group">
                     <label>标题</label>
                     <input name="title" type="text" class="form-control" placeholder="这里是标题">
@@ -17,4 +17,6 @@
 
  </div>
 @endsection
+
+
 
