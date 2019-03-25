@@ -8,3 +8,9 @@ php artisan preset none
  E:\wamp64\www\myframework\lalashop\app\Policies
 
 php  artisan make:policy Postpolicy
+
+3, 评论
+
+php artisan make:migration create_comments_table
+
+php artisan migrate
