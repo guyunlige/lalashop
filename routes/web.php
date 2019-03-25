@@ -16,6 +16,26 @@
 // Route::get('/posts/{post}','\App\Http\Controllers\PostController@show');
 
 
+//  用户登录模块的路由
+
+// 注册
+Route::get('/register', '\App\Http\Controllers\RegisterController@index');
+// 注册行为
+Route::post('/register', '\App\Http\Controllers\RegisterController@register');
+
+// 登录页面
+Route::get('/login', '\App\Http\Controllers\LoginController@index');
+// 登录行为
+Route::post('/login', '\App\Http\Controllers\LoginController@login');
+// 登出行为
+Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
+
+// 个人设置页面
+Route::get('/user/me/setting', '\App\Http\Controllers\UserController@setting');
+// 个人设置操作
+Route::post('/user/me/setting', '\App\Http\Controllers\UserController@settingStore');
+
+
 //列表
 Route::get('/posts', '\App\Http\Controllers\PostController@index');
 //详情
