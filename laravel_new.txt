@@ -2,3 +2,9 @@
 1,移除前端脚手架代码
 
 php artisan preset none
+
+2, 用户授权Policy
+
+ E:\wamp64\www\myframework\lalashop\app\Policies
+
+php  artisan make:policy Postpolicy

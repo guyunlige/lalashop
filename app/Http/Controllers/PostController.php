@@ -39,7 +39,9 @@ class PostController extends Controller
         );
 
         // 逻辑
-        Post::create(request(['title', 'content']));
+        $user_id = \Auth::id();
+        $params = array_merge(request(['title', 'content']),compact('user_id'));
+        Post::create($params);
 
         // 渲染
         return redirect('/posts');
@@ -62,6 +64,9 @@ class PostController extends Controller
             ]
         );
 
+        // TODO 3，策略判断
+        $this->authorize('update',$post);
+
         // 逻辑
         $post->title = request('title');
         $post->content = request('content');
@@ -74,6 +79,9 @@ class PostController extends Controller
     //删除
     public function delete(Post $post)
     {
+        // 3，策略判断
+        $this->authorize('delete',$post);
+
         $post->delete();
         return redirect('/posts');
     }
