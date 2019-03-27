@@ -13,10 +13,42 @@ php  artisan make:policy Postpolicy
 
 php artisan make:migration create_comments_table
 
-php artisan migrate
+php artisan migrate -- 数据表迁移
 
 3,$post->user->name  等价于 \Auth::user()->name  要登录
 
 @if(\Auth::user()) {{ \Auth::user()->name }}@else 未登录 @endif
 
 @if($post->user) {{ $post->user->name }}@else 未登录 @endif
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+5，点赞
+
+php artisan make:migration create_zans_table
+
+php artisan migrate  -- 数据表迁移
+
+php artisan make:model Zan
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

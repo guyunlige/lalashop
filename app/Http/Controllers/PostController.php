@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Post;
+use \App\Zan;
 use \App\Comment;
 use Illuminate\Support\Facades\Request;
 
@@ -11,8 +12,8 @@ class PostController extends Controller
     //列表页
     public function index()
     {
-        // withCount('Comments') 获取评论数，模板渲染是 {{$post->comments_count}}
-        $posts = Post::orderBy('created_at', 'desc')->withCount('Comments')->paginate(3);
+        // withCount('Comments') 获取评论数/赞，模板渲染是 {{$post->comments_count}}
+        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments','zans'])->paginate(3);
         return view('post/index', compact('posts'));
     }
 
@@ -120,5 +121,31 @@ class PostController extends Controller
         $post->comments()->save($comment);
 
         return back();
+    }
+
+    // 点赞
+    public function zan(Post $post)
+    {
+        $user_id = \Auth::id();
+        if (!$user_id) {
+            return redirect('/posts');
+        }
+        $param = [
+            'user_id' => $user_id, // 登录的当前用户，才能点赞
+            'post_id' => $post->id,
+
+        ];
+
+        // firstOrCreate ==> 如果用的话，查找出来；没有的话，创建
+        Zan::firstOrCreate($param);
+        return back();// 回退上一个页面
+    }
+
+    // 取消点赞
+    public function unzan(Post $post)
+    {
+        // 文章与赞需要关联
+        $post->zan(\Auth::id())->delete();
+        return back();// 回退上一个页面
     }
 }
