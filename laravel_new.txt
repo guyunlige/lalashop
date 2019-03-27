@@ -14,3 +14,5 @@ php  artisan make:policy Postpolicy
 php artisan make:migration create_comments_table
 
 php artisan migrate
+
+3,$post->user->name  等价于 \Auth::user()->name  前者使用，后者用不了
