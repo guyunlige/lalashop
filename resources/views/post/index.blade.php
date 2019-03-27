@@ -36,10 +36,10 @@
             @foreach($posts as $post)
             <div class="blog-post">
                 <h2 class="blog-post-title"><a href="/posts/{{$post->id}}">{{$post->title}}</a></h2>
-                <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}}<a href="/user/5">{{$post->user->name}}</a></p>
+                <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="/user/{{$post->user_id}}"> {{$post->user->name}}</a></p>
                 {{--超出100个显示...--}}
                 <p>{!! str_limit($post->content,100,'...') !!}
-                <p class="blog-post-meta">赞 0 | 评论 0</p>
+                <p class="blog-post-meta">赞 0 | 评论 {{$post->comments_count}}</p>
             </div>
             @endforeach
             {{--列表--}}

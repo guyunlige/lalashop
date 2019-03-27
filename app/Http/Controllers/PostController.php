@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Post;
+use \App\Comment;
 use Illuminate\Support\Facades\Request;
 
 class PostController extends Controller
@@ -10,13 +11,15 @@ class PostController extends Controller
     //列表页
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(3);
+        // withCount('Comments') 获取评论数，模板渲染是 {{$post->comments_count}}
+        $posts = Post::orderBy('created_at', 'desc')->withCount('Comments')->paginate(3);
         return view('post/index', compact('posts'));
     }
 
     //详情页
     public function show(Post $post)
     {
+        $post->load('comments');// 渲染模板前加载模型，在模板中不要操作
         return view('post/show', compact('post'));
     }
 
@@ -40,7 +43,7 @@ class PostController extends Controller
 
         // 逻辑
         $user_id = \Auth::id();
-        $params = array_merge(request(['title', 'content']),compact('user_id'));
+        $params = array_merge(request(['title', 'content']), compact('user_id'));
         Post::create($params);
 
         // 渲染
@@ -65,7 +68,7 @@ class PostController extends Controller
         );
 
         // TODO 3，策略判断
-        $this->authorize('update',$post);
+        $this->authorize('update', $post);
 
         // 逻辑
         $post->title = request('title');
@@ -79,8 +82,8 @@ class PostController extends Controller
     //删除
     public function delete(Post $post)
     {
-        // 3，策略判断
-        $this->authorize('delete',$post);
+        // TODO 3，策略判断
+        $this->authorize('delete', $post);
 
         $post->delete();
         return redirect('/posts');
@@ -94,5 +97,28 @@ class PostController extends Controller
         $request = request();
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/' . $path);
+    }
+
+    // 提交评论
+    public function comment(Post $post)
+    {
+        $this->validate(
+            request(),
+            [
+                'content' => 'required|string|min:3',
+            ]
+        );
+
+        // 逻辑 文章的保存一个评论
+        $user_id = \Auth::id();
+        if (!$user_id) {
+            return redirect('/posts');
+        }
+        $comment = new Comment();
+        $comment->user_id = $user_id;
+        $comment->content = \request('content');
+        $post->comments()->save($comment);
+
+        return back();
     }
 }
