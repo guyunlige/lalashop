@@ -35,11 +35,17 @@ php artisan make:model Zan
 
 php artisan es:init
 
-php artisan scout:import "App\Models\Address" //把Address中数据同步到es中
+php artisan scout:import "App\Post" //把Address中数据同步到es中
 
 //如果你已经做过同步了，然后你不小心手动删除或者增加了mysql中到数据，那么你要清空一下es的数据,再从新导入数据。
 
 php artisan scout:flush "App\Models\User"
+
+php artisan scout:flush "App\Post"
+
+/vendor/tamayo/laravel-scout-elastic/src/ElasticsearchEngine.php
+
+/vendor/laravel/scout/src/Searchable.php
 
 
 
