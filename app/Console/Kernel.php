@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // es 挂载 command  ==》 php artisan 查看
+        // es 挂载 command  ==>  php artisan 查看
         \App\Console\Commands\ESInit::class,
     ];
 
