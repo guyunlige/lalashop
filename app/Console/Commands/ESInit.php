@@ -34,17 +34,20 @@ class ESInit extends Command
     /**
      * Execute the console command.
      * 实际要做的事情
+     *  php artisan es:init
      *
      * @return mixed
      */
     public function handle()
     {
-        $client = new Client();
-        // 创建模版 'scout.elasticsearch.hosts')[0] ==> config\scout.php 的 配置
-        $url = config('scout.elasticsearch.hosts')[0] . '/_template/tmp';
-        // $client->delete($url); // 一开始没有
+        //创建template
+        $client=new Client();
+
+        $url=config('scout.elasticsearch.hosts')[0]. '/_template/tmp';
+        $client->delete($url);
+
         $param = [
-            'json' => [
+            'json'=>[
                 'template' => config('scout.elasticsearch.index'),
                 'mappings' => [
                     '_default_' => [
@@ -55,7 +58,6 @@ class ESInit extends Command
                                     'mapping' => [
                                         'type' => 'text',
                                         'analyzer' => 'ik_smart',
-                                        'ignore_above' => 256,
                                         'fields' => [
                                             'keyword' => [
                                                 'type' => 'keyword'
@@ -66,16 +68,18 @@ class ESInit extends Command
                             ]
                         ]
                     ]
-                ]
-            ]
+                ],
+            ],
         ];
-        $client->put($url, $param);
-        $this->info("========创建模板成功=======");
+        $client->put($url,$param);
 
-        // 创建 es 索引 *********************************************************************************
+        //记录
+        $this->info("=======创建模板成功=======");
+
+        //创建index
         $url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index');
-        // $client->delete($url); // 一开始没有
-        $param = [
+        $client->delete($url);
+        $param=[
             'json' => [
                 'settings' => [
                     'refresh_interval' => '5s',
@@ -91,8 +95,11 @@ class ESInit extends Command
                 ]
             ]
         ];
-        $client->put($url, $param);
-        $this->info("========创建索引成功=======");
+
+        $client->put($url,$param);
+
+        //记录
+        $this->info("=========创建索引成功=========");
 
     }
 }
