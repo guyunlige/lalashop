@@ -51,7 +51,13 @@ http://127.0.0.1:9200/lalashop/_doc/3
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+整合  rabbitMQ
 
+composer require vladimir-yuldashev/laravel-queue-rabbitmq:7.4
+
+composer 版本不够
+
+composer self-update
 
 
 
