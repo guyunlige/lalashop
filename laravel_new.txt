@@ -47,6 +47,10 @@ php artisan scout:flush "App\Post"
 
 /vendor/laravel/scout/src/Searchable.php
 
+http://127.0.0.1:9200/lalashop/_doc/3
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
 
 
