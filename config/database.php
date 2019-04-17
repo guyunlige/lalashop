@@ -106,13 +106,14 @@ return [
 
     'redis' => [
 
-        'client' => 'predis',
+        'client' => 'predis', // PECL 安装 Redis PHP 扩展  使用 phpredis
 
         'default' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 0,
+//            'read_write_timeout' => 60,
         ],
 
     ],

@@ -50,7 +50,16 @@ php artisan scout:flush "App\Post"
 
 例子： http://127.0.0.1:9200/lalashop/_doc/3
 
-​    参考：https://learnku.com/articles/20311    十分感谢  @[沙漠行者](https://learnku.com/blog/GreyWolf) 下面也是他的建议：
+ try {
+            $client->delete($url);
+        } catch (\Exception $e) {
+            $this->info("===delete模版出现错误==" . $e->getMessage());
+        }
+
+
+------------------------
+
+参考：https://learnku.com/articles/20311
 
 1. 使用这个包是怎么同步数据的？是通过使用它的增，删。也就是说不要手动的添加和删除数据库的数据。
 2. 如果数据怎么导入都不一致，这个问题确实出现过，那么我们就要先彻底的清除 es 中的数据，在从新 import 你的 model 里的数据。这样数据也就可以保持同步了。
@@ -61,19 +70,17 @@ php artisan scout:flush "App\Post"
 
 整合  rabbitMQ
 
-composer require vladimir-yuldashev/laravel-queue-rabbitmq:7.4
+composer require vladimir-yuldashev/laravel-queue-rabbitmq:7.4  // laravel 5.7  ==>7.4  || laravel 5.5  ==>5.5
 
 composer 版本不够
 
 composer self-update
 
- try {
-            $client->delete($url);
-        } catch (\Exception $e) {
-            $this->info("===delete模版出现错误==" . $e->getMessage());
-        }
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+整合  redis
 
+composer require predis/predis:1.1
 
 
 

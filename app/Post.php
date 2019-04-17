@@ -8,8 +8,8 @@ use Laravel\Scout\Searchable;
 class Post extends BaseModel
 {
     use Searchable;
-    protected $table = 'posts';
-    protected $fileable = ['title', 'content'];
+//    protected $table = 'posts';
+//    protected $fileable = ['title', 'content'];
 
     //protected $guarded=[]; //不可以注入的字段
 
