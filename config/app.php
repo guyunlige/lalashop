@@ -184,6 +184,7 @@ return [
         // rabbitmq 消息队列
         VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class,
 
+
     ],
 
     /*

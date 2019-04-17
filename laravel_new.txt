@@ -35,7 +35,7 @@ php artisan make:model Zan
 
 php artisan es:init
 
-php artisan scout:import "App\Post" //把Address中数据同步到es中
+php artisan scout:import "App\Post" // 把Post中数据同步到es中
 
 //如果你已经做过同步了，然后你不小心手动删除或者增加了mysql中到数据，那么你要清空一下es的数据,再从新导入数据。
 
@@ -43,11 +43,19 @@ php artisan scout:flush "App\Models\User"
 
 php artisan scout:flush "App\Post"
 
+修改
 /vendor/tamayo/laravel-scout-elastic/src/ElasticsearchEngine.php
 
 /vendor/laravel/scout/src/Searchable.php
 
-http://127.0.0.1:9200/lalashop/_doc/3
+例子： http://127.0.0.1:9200/lalashop/_doc/3
+
+​    参考：https://learnku.com/articles/20311    十分感谢  @[沙漠行者](https://learnku.com/blog/GreyWolf) 下面也是他的建议：
+
+1. 使用这个包是怎么同步数据的？是通过使用它的增，删。也就是说不要手动的添加和删除数据库的数据。
+2. 如果数据怎么导入都不一致，这个问题确实出现过，那么我们就要先彻底的清除 es 中的数据，在从新 import 你的 model 里的数据。这样数据也就可以保持同步了。
+3. 切忌！如果你手动删除或者添加了数据库中的数据，要先执行 scout:flush，再执行 scout:import。
+4. 如果觉得这个包不好用，可以直接使用原生的语句去写，其实 es 就相当于一个数据库，可以这么理解。但是其实不一样的。用途不一样。开始对它的语法肯定觉得费劲，多阅读一下官方文档！慢慢就好了！
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -59,7 +67,11 @@ composer 版本不够
 
 composer self-update
 
-
+ try {
+            $client->delete($url);
+        } catch (\Exception $e) {
+            $this->info("===delete模版出现错误==" . $e->getMessage());
+        }
 
 
 

@@ -16,7 +16,7 @@ class Post extends BaseModel
     //定义索引里面的type
     public function searchableAs()
     {
-        return '_doc';
+        return 'post'; // 索引，可以随便改，尤其是手动修改数据库后
     }
 
     //定义有哪些字段需要搜索

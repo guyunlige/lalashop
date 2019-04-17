@@ -34,30 +34,35 @@ class ESInit extends Command
     /**
      * Execute the console command.
      * 实际要做的事情
-     *  php artisan es:init
+     * php artisan es:init
      *
      * @return mixed
      */
     public function handle()
     {
-        //创建template
-        $client=new Client();
-
-        $url=config('scout.elasticsearch.hosts')[0]. '/_template/tmp';
-        $client->delete($url);
-
-        $param = [
-            'json'=>[
+        $client = new Client();
+        // 创建模版
+        $url = config('scout.elasticsearch.hosts')[0] . '/_template/tmp';
+//        $client->delete($url); // 一开始没有，
+        $client->put($url, [
+            'json' => [
                 'template' => config('scout.elasticsearch.index'),
+                'settings' => [
+                    'number_of_shards' => 1
+                ],
                 'mappings' => [
                     '_default_' => [
+                        '_all' => [
+                            'enabled' => true
+                        ],
                         'dynamic_templates' => [
                             [
                                 'strings' => [
                                     'match_mapping_type' => 'string',
                                     'mapping' => [
                                         'type' => 'text',
-                                        'analyzer' => 'ik_smart',
+                                        'analyzer' => 'ik_max_word',
+                                        'ignore_above' => 256,
                                         'fields' => [
                                             'keyword' => [
                                                 'type' => 'keyword'
@@ -68,18 +73,14 @@ class ESInit extends Command
                             ]
                         ]
                     ]
-                ],
-            ],
-        ];
-        $client->put($url,$param);
-
-        //记录
-        $this->info("=======创建模板成功=======");
-
-        //创建index
+                ]
+            ]
+        ]);
+        $this->info('=====创建模板成功=====');
+        // 创建 index
         $url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index');
-        $client->delete($url);
-        $param=[
+        $client->delete($url); // 一开始没有，报错使用
+        $client->put($url, [
             'json' => [
                 'settings' => [
                     'refresh_interval' => '5s',
@@ -94,12 +95,8 @@ class ESInit extends Command
                     ]
                 ]
             ]
-        ];
-
-        $client->put($url,$param);
-
-        //记录
-        $this->info("=========创建索引成功=========");
+        ]);
+        $this->info('=====创建索引成功=====');
 
     }
 }
