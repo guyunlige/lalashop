@@ -43,7 +43,7 @@ class ESInit extends Command
         $client = new Client();
         // 创建模版
         $url = config('scout.elasticsearch.hosts')[0] . '/_template/tmp';
-        $client->delete($url); // 一开始没有，
+//        $client->delete($url); // 一开始没有，
         $client->put($url, [
             'json' => [
                 'template' => config('scout.elasticsearch.index'),
@@ -79,7 +79,7 @@ class ESInit extends Command
         $this->info('=====创建模板成功=====');
         // 创建 index
         $url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index');
-        $client->delete($url); // 一开始没有，报错使用
+//        $client->delete($url); // 一开始没有，报错使用
         $client->put($url, [
             'json' => [
                 'settings' => [

@@ -89,6 +89,7 @@ return [
     ],
 
     'elasticsearch' => [
+        // http://localhost:9200/lalashop/post/1
         'index' => env('ELASTICSEARCH_INDEX', 'lalashop'),
         'hosts' => [
             env('ELASTICSEARCH_HOST', 'http://127.0.0.1:9200'),

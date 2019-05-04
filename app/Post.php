@@ -16,6 +16,7 @@ class Post extends BaseModel
     //定义索引里面的type
     public function searchableAs()
     {
+        // http://localhost:9200/lalashop/post/1
         return 'post'; // 索引，可以随便改，尤其是手动修改数据库后
     }
 
