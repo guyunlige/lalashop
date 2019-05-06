@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index()
     {
         // withCount('Comments') 获取评论数/赞，模板渲染是 {{$post->comments_count}}
-        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments','zans'])->paginate(3);
+        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->paginate(3);
         return view('post/index', compact('posts'));
     }
 
@@ -147,5 +147,13 @@ class PostController extends Controller
         // 文章与赞需要关联
         $post->zan(\Auth::id())->delete();
         return back();// 回退上一个页面
+    }
+
+    /**
+     * 搜索结果也search
+     */
+    public function search()
+    {
+        return view("post/search");
     }
 }

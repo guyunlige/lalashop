@@ -62,6 +62,8 @@ Route::post('/posts/{post}/comment', '\App\Http\Controllers\PostController@comme
 Route::get('/posts/{post}/zan', '\App\Http\Controllers\PostController@zan');
 Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
 
+// ***  搜索 ***************************************************************************
+Route::get('/posts/search', '\App\Http\Controllers\PostController@search');
 
 
 
