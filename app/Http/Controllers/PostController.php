@@ -153,7 +153,17 @@ class PostController extends Controller
      * 搜索结果也search
      */
     public function search()
-    {
-        return view("post/search");
+    {  // 验证
+        $this->validate(
+            request(), [
+            'query' => 'required'
+        ]);
+
+        // 逻辑
+        $query = \request('query');
+        $posts = Post::search($query)->paginate(2);
+
+        // 渲染
+        return view("post/search", compact('posts', 'query'));
     }
 }
