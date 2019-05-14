@@ -65,7 +65,10 @@ Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
 // ***  搜索 ***************************************************************************
 Route::get('/posts/search', 'PostController@search');
 
-
+// *** 个人中兴心***************************************************************************
+Route::get('/user/{user}', 'UserController@show')->where('user', '[0-9]+');
+Route::post('/user/{user}/fan', 'UserController@fan');
+Route::post('/user/{user}/unfan', 'UserController@unfan');
 
 
 
