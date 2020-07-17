@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,7 @@ class UserController extends Controller
         $name = request('name');
         $user = Auth::user();
         if ($name != $user->name) {
-            if(\App\User::where('name', $name)->count() > 0) {
+            if(User::where('name', $name)->count() > 0) {
                 return back()->withErrors(array('message' => '用户名称已经被注册'));
             }
             $user->name = request('name');

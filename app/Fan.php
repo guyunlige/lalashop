@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\BaseModel;
-
 class Fan extends BaseModel
 {
     // 粉丝用户

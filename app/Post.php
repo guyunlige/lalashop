@@ -8,12 +8,9 @@ use Laravel\Scout\Searchable;
 class Post extends BaseModel
 {
     use Searchable;
-//    protected $table = 'posts';
-//    protected $fileable = ['title', 'content'];
 
-    //protected $guarded=[]; //不可以注入的字段
 
-    //定义索引里面的type
+    // 定义索引里面的type
     public function searchableAs()
     {
         // http://localhost:9200/lalashop/post/1
@@ -32,8 +29,7 @@ class Post extends BaseModel
     // 关联用户
     public function user()
     {
-        //模型关联，反向关联
-//        return $this->belongsTo('App\User','user_id','id');
+        // 模型关联，反向关联
         return $this->belongsTo('App\User');
     }
 
@@ -43,7 +39,7 @@ class Post extends BaseModel
         return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
 
-    // 文章与赞需要关联,一篇文章只能有一个赞，1 对 1的关系
+    // 文章与赞需要关联,一篇文章只能有一个赞，1 对 1 的关系
     public function zan($user_id)
     {
         // 和用户进行关联

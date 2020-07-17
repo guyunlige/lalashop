@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use \App\Post;
-use \App\Zan;
-use \App\Comment;
-use Illuminate\Support\Facades\Request;
+use App\Post;
+use App\Zan;
+use App\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -34,7 +33,6 @@ class PostController extends Controller
     // 创建文章--逻辑
     public function store()
     {
-        // 验证  E:\wamp64\www\myframework\lalashop\resources\lang\ch\validation.php
         $this->validate(
             request(),
             [
@@ -161,7 +159,7 @@ class PostController extends Controller
         ]);
 
         // 逻辑
-        $query = \request('query');
+        $query = request('query');
         $posts = Post::search($query)->paginate(2);
 
         // 渲染

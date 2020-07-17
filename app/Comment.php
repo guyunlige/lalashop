@@ -2,14 +2,12 @@
 
 namespace App;
 
-use App\BaseModel;
-
 class Comment extends BaseModel
 {
     // 评论所属文章
     public function post(){
         //模型关联，反向关联
-//        return $this->belongsTo('App\User','user_id','id');
+        //  return $this->belongsTo('App\User','user_id','id');
         return $this->belongsTo('App\Post');
     }
 

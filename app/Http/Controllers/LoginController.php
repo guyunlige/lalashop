@@ -1,8 +1,9 @@
 <?php
-
+/**
+ * 登录页面
+ */
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -14,7 +15,7 @@ class LoginController extends Controller
 
     public function login()
     {
-        $this->validate(\request(), [
+        $this->validate(request(), [
             'email' => 'required|email',
             'password' => 'required|min:5|max:10',
             'is_remember' => 'integer',
@@ -26,7 +27,7 @@ class LoginController extends Controller
             return redirect('/posts');
         }
 
-        return \Redirect::back()->withErrors('邮箱密码不匹配');
+        return redirect()->back()->withErrors('邮箱密码不匹配');
     }
 
     public function logout()

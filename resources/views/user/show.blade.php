@@ -5,8 +5,6 @@
             <p><img src="/storage/9f0b0809fd136c389c20f949baae3957/iBkvipBCiX6cHitZSdTaXydpen5PBiul7yYCc88O.jpeg" alt=""
                     class="img-rounded" style="border-radius:500px; height: 40px"> Kassandra Ankunding2
             </p>
-
-
             <footer>关注：4｜粉丝：0｜文章：9</footer>
         </blockquote>
     </div>
