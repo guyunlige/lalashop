@@ -1,0 +1,10 @@
+
+### 1, Windows10  启动  elasticsearch
+
+C:\Users\25438>d:
+
+D:\>cd elasticsearch-7.8.0
+
+D:\elasticsearch-7.8.0>cd bin
+
+D:\elasticsearch-7.8.0\bin>elasticsearch -d

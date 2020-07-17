@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     //个人设置页面
     public function setting()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         return view('user.setting',compact('user'));
     }
 
@@ -21,7 +22,7 @@ class UserController extends Controller
         ]);
 
         $name = request('name');
-        $user = \Auth::user();
+        $user = Auth::user();
         if ($name != $user->name) {
             if(\App\User::where('name', $name)->count() > 0) {
                 return back()->withErrors(array('message' => '用户名称已经被注册'));
@@ -29,7 +30,7 @@ class UserController extends Controller
             $user->name = request('name');
         }
         if ($request->file('avatar')) {
-            $path = $request->file('avatar')->storePublicly(md5(\Auth::id() . time()));
+            $path = $request->file('avatar')->storePublicly(md5(Auth::id() . time()));
             $user->avatar = "/storage/". $path;
         }
 

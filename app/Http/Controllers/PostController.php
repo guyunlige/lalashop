@@ -6,6 +6,7 @@ use \App\Post;
 use \App\Zan;
 use \App\Comment;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -43,7 +44,7 @@ class PostController extends Controller
         );
 
         // 逻辑
-        $user_id = \Auth::id();
+        $user_id = Auth::id();
         $params = array_merge(request(['title', 'content']), compact('user_id'));
         Post::create($params);
 
@@ -111,7 +112,7 @@ class PostController extends Controller
         );
 
         // 逻辑 文章的保存一个评论
-        $user_id = \Auth::id();
+        $user_id = Auth::id();
         if (!$user_id) {
             return redirect('/posts');
         }
@@ -126,7 +127,7 @@ class PostController extends Controller
     // 点赞
     public function zan(Post $post)
     {
-        $user_id = \Auth::id();
+        $user_id = Auth::id();
         if (!$user_id) {
             return redirect('/posts');
         }
@@ -145,7 +146,7 @@ class PostController extends Controller
     public function unzan(Post $post)
     {
         // 文章与赞需要关联
-        $post->zan(\Auth::id())->delete();
+        $post->zan(Auth::id())->delete();
         return back();// 回退上一个页面
     }
 
